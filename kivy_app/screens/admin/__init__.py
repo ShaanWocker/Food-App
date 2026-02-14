@@ -1,0 +1,3 @@
+"""
+Admin screens package initialization.
+"""
