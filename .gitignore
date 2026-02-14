@@ -41,6 +41,7 @@ env/
 *.db
 *.sqlite
 *.sqlite3
+test.db
 
 # Logs
 *.log
