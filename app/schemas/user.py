@@ -1,10 +1,8 @@
-"""
-Pydantic schemas for user management.
-"""
 from typing import Optional
 from datetime import datetime
 from pydantic import BaseModel, EmailStr, validator
 import re
+from uuid import UUID
 
 
 class UserBase(BaseModel):
@@ -21,13 +19,6 @@ class UserCreate(UserBase):
     
     @validator('password')
     def validate_password(cls, v):
-        """
-        Validate password strength:
-        - Minimum 8 characters
-        - At least one uppercase letter
-        - At least one number
-        - At least one special character
-        """
         if len(v) < 8:
             raise ValueError('Password must be at least 8 characters long')
         if not re.search(r'[A-Z]', v):
@@ -40,7 +31,6 @@ class UserCreate(UserBase):
     
     @validator('phone_number')
     def validate_phone(cls, v):
-        """Validate phone number format."""
         if v and not re.match(r'^\+?1?\d{9,15}$', v):
             raise ValueError('Invalid phone number format')
         return v
@@ -54,7 +44,7 @@ class UserUpdate(BaseModel):
 
 class UserResponse(UserBase):
     """Schema for user response."""
-    id: str
+    id: UUID
     is_active: bool
     is_admin: bool
     created_at: datetime

@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
     # Database
-    DATABASE_URL: str = "postgresql://foodapp:foodapp123@localhost:5432/foodapp_db"
+    DATABASE_URL: str = "postgresql://foodapp:foodapp123@postgres:5432/foodapp_db"
     
     # JWT
     SECRET_KEY: str = "your-super-secret-key-change-this-in-production"
