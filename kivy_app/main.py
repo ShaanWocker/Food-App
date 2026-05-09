@@ -8,6 +8,8 @@ from kivy_app.screens.register_screen import RegisterScreen
 from kivy_app.screens.home_screen import HomeScreen
 from kivy_app.screens.menu_screen import MenuScreen
 from kivy_app.screens.cart_screen import CartScreen
+from kivy_app.screens.admin.admin_meal_list_screen import AdminMealListScreen
+from kivy_app.screens.admin.admin_meal_form_screen import AdminMealFormScreen
 from kivy_app.services.auth_service import init_auth
 
 
@@ -34,6 +36,8 @@ class FoodOrderingApp(MDApp):
         self.screen_manager.add_widget(HomeScreen(name="home"))
         self.screen_manager.add_widget(MenuScreen(name="menu"))
         self.screen_manager.add_widget(CartScreen(name="cart"))
+        self.screen_manager.add_widget(AdminMealListScreen(name="admin_meal_list"))
+        self.screen_manager.add_widget(AdminMealFormScreen(name="admin_meal_form"))
         
         # Check if user is already logged in
         if init_auth():

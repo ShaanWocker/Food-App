@@ -5,9 +5,8 @@ import uuid
 from datetime import datetime
 from enum import Enum as PyEnum
 from sqlalchemy import Column, String, DateTime, Numeric, Text, ForeignKey, Enum
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
-from app.database import Base
+from app.database import Base, GUID
 
 
 class PaymentStatus(PyEnum):
@@ -33,10 +32,10 @@ class Order(Base):
     """
     __tablename__ = "orders"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4, index=True)
+    user_id = Column(GUID(), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     total_price = Column(Numeric(10, 2), nullable=False)
-    delivery_address_id = Column(UUID(as_uuid=True), ForeignKey("addresses.id"), nullable=False)
+    delivery_address_id = Column(GUID(), ForeignKey("addresses.id"), nullable=False)
     payment_status = Column(Enum(PaymentStatus), default=PaymentStatus.PENDING, nullable=False)
     order_status = Column(Enum(OrderStatus), default=OrderStatus.PENDING, nullable=False, index=True)
     stripe_payment_id = Column(String, unique=True, nullable=True)
@@ -59,9 +58,9 @@ class OrderItem(Base):
     """
     __tablename__ = "order_items"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    order_id = Column(UUID(as_uuid=True), ForeignKey("orders.id", ondelete="CASCADE"), nullable=False, index=True)
-    meal_id = Column(UUID(as_uuid=True), ForeignKey("meals.id"), nullable=False)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    order_id = Column(GUID(), ForeignKey("orders.id", ondelete="CASCADE"), nullable=False, index=True)
+    meal_id = Column(GUID(), ForeignKey("meals.id"), nullable=False)
     quantity = Column(Numeric, nullable=False)
     price_at_purchase = Column(Numeric(10, 2), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
