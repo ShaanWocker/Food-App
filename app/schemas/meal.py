@@ -2,6 +2,7 @@
 Pydantic schemas for meals.
 """
 from typing import Optional
+from uuid import UUID
 from datetime import datetime, date
 from decimal import Decimal
 from pydantic import BaseModel, validator
@@ -50,7 +51,7 @@ class MealUpdate(BaseModel):
 
 class MealResponse(MealBase):
     """Schema for meal response."""
-    id: str
+    id: UUID
     created_at: datetime
     updated_at: datetime
     

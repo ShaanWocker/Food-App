@@ -49,3 +49,23 @@ def clear_token():
     data = _load_storage()
     data.pop('token', None)
     _save_storage(data)
+
+
+def save_user_data(user: dict):
+    """Save user profile data (e.g. is_admin, username)."""
+    data = _load_storage()
+    data['user'] = user
+    _save_storage(data)
+
+
+def get_user_data() -> dict:
+    """Get saved user profile data."""
+    data = _load_storage()
+    return data.get('user', {})
+
+
+def clear_user_data():
+    """Clear saved user profile data."""
+    data = _load_storage()
+    data.pop('user', None)
+    _save_storage(data)
