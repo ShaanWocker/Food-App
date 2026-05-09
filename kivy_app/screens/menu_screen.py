@@ -15,6 +15,9 @@ from kivy_app.services.cart_service import add_to_cart
 # Common meal categories for filter buttons
 CATEGORIES = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Beverage"]
 
+# Max characters shown for meal description in list items
+DESCRIPTION_MAX_LENGTH = 60
+
 
 class MenuScreen(Screen):
     """Menu screen for browsing meals."""
@@ -161,7 +164,7 @@ class MenuScreen(Screen):
         secondary = f"${price:.2f}"
         if category:
             secondary += f"  •  {category}"
-        tertiary = description[:60] + ("…" if len(description) > 60 else "") if description else ""
+        tertiary = description[:DESCRIPTION_MAX_LENGTH] + ("…" if len(description) > DESCRIPTION_MAX_LENGTH else "") if description else ""
         if not available:
             tertiary = "⚠ Currently unavailable"
 

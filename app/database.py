@@ -30,14 +30,23 @@ class GUID(TypeDecorator):
     def process_bind_param(self, value, dialect):
         if value is None:
             return value
-        return str(value)
+        # Validate that the value is a proper UUID before storing
+        try:
+            return str(_uuid.UUID(str(value)))
+        except (ValueError, AttributeError) as exc:
+            raise ValueError(f"Invalid UUID value: {value!r}") from exc
 
     def process_result_value(self, value, dialect):
         if value is None:
             return value
-        if not isinstance(value, _uuid.UUID):
-            return _uuid.UUID(str(value))
-        return value
+        try:
+            if not isinstance(value, _uuid.UUID):
+                return _uuid.UUID(str(value))
+            return value
+        except (ValueError, AttributeError) as exc:
+            raise ValueError(
+                f"Cannot parse UUID from database value: {value!r}"
+            ) from exc
 
 
 # SQLite needs special engine config (used in tests); PostgreSQL uses pooling

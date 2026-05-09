@@ -1,6 +1,7 @@
 """
 Admin form screen for creating or editing a meal.
 """
+from datetime import datetime
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
@@ -204,7 +205,8 @@ class AdminMealFormScreen(Screen):
         if len(parts) != 2 or not parts[0].isdigit() or not parts[1].isdigit():
             return False, "Month format must be YYYY-MM (e.g. 2024-05)."
         year_val, month_val = int(parts[0]), int(parts[1])
-        if not (2000 <= year_val <= 2100) or not (1 <= month_val <= 12):
+        current_year = datetime.now().year
+        if not (current_year - 5 <= year_val <= current_year + 10) or not (1 <= month_val <= 12):
             return False, "Invalid year or month value."
 
         return True, ""
