@@ -1,6 +1,15 @@
 """
 Main Kivy application entry point.
 """
+import os
+import sys
+
+# Running this file directly (`python kivy_app/main.py`) puts this file's
+# own directory on sys.path, not the repo root - but every screen/service
+# here imports via the absolute `kivy_app.` package path, so that import
+# fails unless the repo root is added explicitly.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy_app.screens.login_screen import LoginScreen
