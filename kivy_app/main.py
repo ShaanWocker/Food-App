@@ -8,8 +8,16 @@ from kivy_app.screens.register_screen import RegisterScreen
 from kivy_app.screens.home_screen import HomeScreen
 from kivy_app.screens.menu_screen import MenuScreen
 from kivy_app.screens.cart_screen import CartScreen
+from kivy_app.screens.checkout_screen import CheckoutScreen
+from kivy_app.screens.orders_screen import OrdersScreen
+from kivy_app.screens.order_detail_screen import OrderDetailScreen
+from kivy_app.screens.profile_screen import ProfileScreen
+from kivy_app.screens.address_screen import AddressScreen
+from kivy_app.screens.address_form_screen import AddressFormScreen
 from kivy_app.screens.admin.admin_meal_list_screen import AdminMealListScreen
 from kivy_app.screens.admin.admin_meal_form_screen import AdminMealFormScreen
+from kivy_app.screens.admin.admin_order_list_screen import AdminOrderListScreen
+from kivy_app.screens.admin.admin_analytics_screen import AdminAnalyticsScreen
 from kivy_app.services.auth_service import init_auth
 
 
@@ -36,8 +44,16 @@ class FoodOrderingApp(MDApp):
         self.screen_manager.add_widget(HomeScreen(name="home"))
         self.screen_manager.add_widget(MenuScreen(name="menu"))
         self.screen_manager.add_widget(CartScreen(name="cart"))
+        self.screen_manager.add_widget(CheckoutScreen(name="checkout"))
+        self.screen_manager.add_widget(OrdersScreen(name="orders"))
+        self.screen_manager.add_widget(OrderDetailScreen(name="order_detail"))
+        self.screen_manager.add_widget(ProfileScreen(name="profile"))
+        self.screen_manager.add_widget(AddressScreen(name="addresses"))
+        self.screen_manager.add_widget(AddressFormScreen(name="address_form"))
         self.screen_manager.add_widget(AdminMealListScreen(name="admin_meal_list"))
         self.screen_manager.add_widget(AdminMealFormScreen(name="admin_meal_form"))
+        self.screen_manager.add_widget(AdminOrderListScreen(name="admin_order_list"))
+        self.screen_manager.add_widget(AdminAnalyticsScreen(name="admin_analytics"))
         
         # Check if user is already logged in
         if init_auth():

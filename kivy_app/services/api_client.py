@@ -4,12 +4,13 @@ API client for backend communication.
 import requests
 from typing import Optional, Dict, Any
 import os
+from kivy_app.config import API_BASE_URL
 
 
 class APIClient:
     """HTTP client for communicating with the FastAPI backend."""
-    
-    def __init__(self, base_url: str = "http://localhost:8000"):
+
+    def __init__(self, base_url: str = API_BASE_URL):
         """
         Initialize API client.
         
@@ -50,19 +51,21 @@ class APIClient:
         response.raise_for_status()
         return response.json()
     
-    def post(self, endpoint: str, data: Optional[Dict] = None) -> Dict[str, Any]:
+    def post(self, endpoint: str, data: Optional[Dict] = None, params: Optional[Dict] = None) -> Dict[str, Any]:
         """
         Make POST request.
-        
+
         Args:
             endpoint: API endpoint
             data: Request body data
-        
+            params: Query string parameters (some endpoints, e.g. payments,
+                take arguments as query params rather than a JSON body)
+
         Returns:
             Response data
         """
         url = f"{self.base_url}{endpoint}"
-        response = requests.post(url, json=data, headers=self._get_headers())
+        response = requests.post(url, json=data, params=params, headers=self._get_headers())
         response.raise_for_status()
         return response.json()
     
@@ -81,7 +84,23 @@ class APIClient:
         response = requests.put(url, json=data, headers=self._get_headers())
         response.raise_for_status()
         return response.json()
-    
+
+    def patch(self, endpoint: str, data: Optional[Dict] = None) -> Dict[str, Any]:
+        """
+        Make PATCH request.
+
+        Args:
+            endpoint: API endpoint
+            data: Request body data
+
+        Returns:
+            Response data
+        """
+        url = f"{self.base_url}{endpoint}"
+        response = requests.patch(url, json=data, headers=self._get_headers())
+        response.raise_for_status()
+        return response.json()
+
     def delete(self, endpoint: str) -> Optional[Dict[str, Any]]:
         """
         Make DELETE request.

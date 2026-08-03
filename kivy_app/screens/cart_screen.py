@@ -152,8 +152,8 @@ class CartScreen(Screen):
         if not self.cart_data or not self.cart_data.get("items"):
             toast("Cart is empty")
             return
-        
-        toast("Checkout feature coming soon!")
+
+        self.manager.current = "checkout"
     
     def go_back(self, *args):
         """Navigate back to home."""

@@ -14,7 +14,7 @@ class HomeScreen(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._admin_btn = None
+        self._admin_buttons = []
         self.build_ui()
 
     def build_ui(self):
@@ -54,7 +54,7 @@ class HomeScreen(Screen):
         orders_btn = MDRaisedButton(
             text="My Orders",
             size_hint_x=1,
-            on_release=self.show_coming_soon
+            on_release=self.go_to_orders
         )
         layout.add_widget(orders_btn)
 
@@ -62,19 +62,38 @@ class HomeScreen(Screen):
         profile_btn = MDRaisedButton(
             text="Profile",
             size_hint_x=1,
-            on_release=self.show_coming_soon
+            on_release=self.go_to_profile
         )
         layout.add_widget(profile_btn)
 
-        # Admin panel button (hidden by default; shown in on_enter for admins)
-        self._admin_btn = MDRaisedButton(
+        # Admin panel buttons (hidden by default; shown in on_enter for admins)
+        admin_meals_btn = MDRaisedButton(
             text="Admin: Manage Meals",
             size_hint_x=1,
             on_release=self.go_to_admin_meals,
         )
-        self._admin_btn.opacity = 0
-        self._admin_btn.disabled = True
-        layout.add_widget(self._admin_btn)
+        layout.add_widget(admin_meals_btn)
+        self._admin_buttons.append(admin_meals_btn)
+
+        admin_orders_btn = MDRaisedButton(
+            text="Admin: Manage Orders",
+            size_hint_x=1,
+            on_release=self.go_to_admin_orders,
+        )
+        layout.add_widget(admin_orders_btn)
+        self._admin_buttons.append(admin_orders_btn)
+
+        admin_analytics_btn = MDRaisedButton(
+            text="Admin: Analytics",
+            size_hint_x=1,
+            on_release=self.go_to_admin_analytics,
+        )
+        layout.add_widget(admin_analytics_btn)
+        self._admin_buttons.append(admin_analytics_btn)
+
+        for btn in self._admin_buttons:
+            btn.opacity = 0
+            btn.disabled = True
 
         # Logout button
         logout_btn = MDRaisedButton(
@@ -87,13 +106,11 @@ class HomeScreen(Screen):
         self.add_widget(layout)
 
     def on_enter(self):
-        """Called when entering the screen. Show admin button for admin users."""
-        if is_admin_user():
-            self._admin_btn.opacity = 1
-            self._admin_btn.disabled = False
-        else:
-            self._admin_btn.opacity = 0
-            self._admin_btn.disabled = True
+        """Called when entering the screen. Show admin buttons for admin users."""
+        is_admin = is_admin_user()
+        for btn in self._admin_buttons:
+            btn.opacity = 1 if is_admin else 0
+            btn.disabled = not is_admin
 
     def go_to_menu(self, *args):
         """Navigate to menu screen."""
@@ -103,13 +120,25 @@ class HomeScreen(Screen):
         """Navigate to cart screen."""
         self.manager.current = "cart"
 
+    def go_to_orders(self, *args):
+        """Navigate to order history screen."""
+        self.manager.current = "orders"
+
+    def go_to_profile(self, *args):
+        """Navigate to profile screen."""
+        self.manager.current = "profile"
+
     def go_to_admin_meals(self, *args):
         """Navigate to admin meal management screen."""
         self.manager.current = "admin_meal_list"
 
-    def show_coming_soon(self, *args):
-        """Show coming soon message."""
-        toast("Feature coming soon!")
+    def go_to_admin_orders(self, *args):
+        """Navigate to admin order management screen."""
+        self.manager.current = "admin_order_list"
+
+    def go_to_admin_analytics(self, *args):
+        """Navigate to admin analytics screen."""
+        self.manager.current = "admin_analytics"
 
     def do_logout(self, *args):
         """Handle logout."""
