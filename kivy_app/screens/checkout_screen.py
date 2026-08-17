@@ -3,6 +3,7 @@ Checkout screen: pick a delivery address, pick a test card, place the
 order, and pay for it via Stripe (test mode).
 """
 from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList, ThreeLineListItem
@@ -202,14 +203,16 @@ class CheckoutScreen(Screen):
     def _select_address(self, address_id: str):
         """Mark an address as selected and highlight its row."""
         self._selected_address_id = address_id
+        theme_cls = MDApp.get_running_app().theme_cls
         for aid, btn in self._address_buttons.items():
-            btn.md_bg_color = self.theme_cls.primary_light if aid == address_id else (0, 0, 0, 0)
+            btn.md_bg_color = theme_cls.primary_light if aid == address_id else (0, 0, 0, 0)
 
     def _select_card(self, token: str):
         """Mark a test card as selected and highlight its row."""
         self._selected_card_token = token
+        theme_cls = MDApp.get_running_app().theme_cls
         for tok, btn in self._card_buttons.items():
-            btn.md_bg_color = self.theme_cls.primary_light if tok == token else (0, 0, 0, 0)
+            btn.md_bg_color = theme_cls.primary_light if tok == token else (0, 0, 0, 0)
 
     # ------------------------------------------------------------------
     # Actions

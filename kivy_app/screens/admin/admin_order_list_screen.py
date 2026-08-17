@@ -2,6 +2,7 @@
 Admin screen for viewing all orders and updating their status.
 """
 from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList, ThreeLineListItem
@@ -142,8 +143,9 @@ class AdminOrderListScreen(Screen):
     def _filter_by_status(self, status: str):
         """Filter the order list by status."""
         self._active_status = None if status == "All" else status
+        theme_cls = MDApp.get_running_app().theme_cls
         for s, btn in self._filter_buttons.items():
-            btn.md_bg_color = self.theme_cls.primary_color if s == status else (0, 0, 0, 0)
+            btn.md_bg_color = theme_cls.primary_color if s == status else (0, 0, 0, 0)
         self.load_orders()
 
     def _open_status_dialog(self, order: dict):

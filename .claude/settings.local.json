@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Shaan/OneDrive/Documents/Development/The Little Olive/venv/Scripts/**)",
+      "PowerShell(python --version)",
+      "PowerShell(pip show reportlab weasyprint fpdf2 2>$null)",
+      "Bash(mkdir -p \"/c/Users/Shaan/AppData/Local/Temp/claude/c--Users-Shaan-OneDrive-Documents-Development-The-Little-Olive/331dcd8d-8661-4796-9691-45bbe06124f2/scratchpad\")",
+      "Bash(docker exec *)",
+      "Bash(grep -v \"SAWarning\\\\|configure_mappers\\\\|sqlalche.me\\\\|^$\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-NetTCPConnection -LocalPort 8000,5432 -State Listen -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,OwningProcess | Format-Table -AutoSize\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-Process -Id \\(Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue\\).OwningProcess -ErrorAction SilentlyContinue | Select-Object Id,ProcessName,Path | Format-Table -AutoSize\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-CimInstance Win32_Process -Filter 'ProcessId=2864' | Select-Object ProcessId,CommandLine | Format-List\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-NetTCPConnection -LocalPort 5433 -State Listen -ErrorAction SilentlyContinue | Select-Object LocalPort,OwningProcess\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-Process -Id \\(Get-NetTCPConnection -LocalPort 5433 -State Listen -ErrorAction SilentlyContinue\\).OwningProcess -ErrorAction SilentlyContinue | Select-Object Id,ProcessName,Path\")",
+      "PowerShell(Stop-Process -Id 2864 -Force -Confirm:$false)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process -Id 2864 -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='python.exe'\")",
+      "Bash(docker exec foodapp-backend python -c \"import kivymd; print\\(kivymd.__file__\\)\" 2>&1 | tail -1 *)",
+      "Read(//c//**)",
+      "WebSearch",
+      "Bash(curl -sL \"https://upload.wikimedia.org/wikipedia/commons/c/c8/Holiday_Prime_Rib_of_Angus_Beef.jpg\" -o \"/c/Users/Shaan/OneDrive/Documents/Development/The Little Olive/kivy_app/assets/images/home_hero.jpg\")",
+      "Bash(python3 -c ' *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Shaan\\AppData\\Local\\Temp\\claude\\c--Users-Shaan-OneDrive-Documents-Development-The-Little-Olive\\331dcd8d-8661-4796-9691-45bbe06124f2\\scratchpad"
+    ]
+  }
+}

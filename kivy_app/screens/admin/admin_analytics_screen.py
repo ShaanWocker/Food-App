@@ -2,6 +2,7 @@
 Admin analytics dashboard - revenue summary and popular meals.
 """
 from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList, TwoLineListItem
@@ -132,8 +133,9 @@ class AdminAnalyticsScreen(Screen):
     def _select_period(self, days: int):
         """Select an analytics time period and reload."""
         self._days = days
+        theme_cls = MDApp.get_running_app().theme_cls
         for d, btn in self._period_buttons.items():
-            btn.md_bg_color = self.theme_cls.primary_color if d == days else (0, 0, 0, 0)
+            btn.md_bg_color = theme_cls.primary_color if d == days else (0, 0, 0, 0)
         self.load_data()
 
     def go_back(self, *args):

@@ -3,6 +3,7 @@ Order detail screen - shows one order's items, status, and delivery info.
 Lets the user pay (or retry payment) for orders that aren't paid yet.
 """
 from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList, TwoLineListItem
@@ -154,8 +155,9 @@ class OrderDetailScreen(Screen):
     def _select_card(self, token: str):
         """Mark a test card as selected and highlight its row."""
         self._selected_card_token = token
+        theme_cls = MDApp.get_running_app().theme_cls
         for tok, btn in self._card_buttons.items():
-            btn.md_bg_color = self.theme_cls.primary_light if tok == token else (0, 0, 0, 0)
+            btn.md_bg_color = theme_cls.primary_light if tok == token else (0, 0, 0, 0)
 
     def _pay_now(self, *args):
         """Pay for this (currently unpaid) order."""

@@ -10,6 +10,13 @@ import sys
 # fails unless the repo root is added explicitly.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# Must be set before any Window-creating Kivy modules are imported below.
+# Otherwise right/middle mouse clicks are treated as a simulated second
+# touch point (Kivy's desktop multitouch emulation), drawn as a translucent
+# circle - not something this app uses, so turn it off.
+from kivy.config import Config
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy_app.screens.login_screen import LoginScreen

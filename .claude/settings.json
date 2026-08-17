@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker exec *)",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS:%{http_code}\\\\n\" -X POST http://localhost:8000/api/v1/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@foodapp.com\",\"password\":\"AdminPass123!\"}')",
+      "Bash(where pandoc *)",
+      "Bash(where wkhtmltopdf *)",
+      "Bash(\"c:/Users/Shaan/OneDrive/Documents/Development/The Little Olive/venv/Scripts/python.exe\" -c \"import importlib; [print\\(m, importlib.util.find_spec\\(m\\) is not None\\) for m in ['weasyprint','reportlab','fpdf','xhtml2pdf','pdfkit']]\")",
+      "PowerShell(Get-Command pandoc -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command wkhtmltopdf -ErrorAction SilentlyContinue)",
+      "PowerShell(& \".\\\\venv\\\\Scripts\\\\python.exe\" -c \"import importlib.util as u; [print\\(m, u.find_spec\\(m\\) is not None\\) for m in ['weasyprint','reportlab','fpdf','xhtml2pdf','pdfkit']]\")"
+    ]
+  }
+}

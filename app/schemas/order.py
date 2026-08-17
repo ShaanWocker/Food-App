@@ -2,6 +2,7 @@
 Pydantic schemas for orders.
 """
 from typing import List, Optional
+from uuid import UUID
 from datetime import datetime
 from decimal import Decimal
 from pydantic import BaseModel
@@ -11,19 +12,19 @@ from app.schemas.meal import MealResponse
 
 class OrderItemResponse(BaseModel):
     """Schema for order item response."""
-    id: str
-    meal_id: str
+    id: UUID
+    meal_id: UUID
     quantity: int
     price_at_purchase: Decimal
     meal: MealResponse
-    
+
     class Config:
         from_attributes = True
 
 
 class AddressResponse(BaseModel):
     """Schema for address response."""
-    id: str
+    id: UUID
     street_address: str
     city: str
     state: str
@@ -43,10 +44,10 @@ class OrderCreate(BaseModel):
 
 class OrderResponse(BaseModel):
     """Schema for order response."""
-    id: str
-    user_id: str
+    id: UUID
+    user_id: UUID
     total_price: Decimal
-    delivery_address_id: str
+    delivery_address_id: UUID
     payment_status: str
     order_status: str
     stripe_payment_id: Optional[str] = None

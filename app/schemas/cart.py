@@ -2,6 +2,7 @@
 Pydantic schemas for cart management.
 """
 from typing import List
+from uuid import UUID
 from decimal import Decimal
 from pydantic import BaseModel, validator
 from app.schemas.meal import MealResponse
@@ -39,19 +40,19 @@ class CartItemUpdate(BaseModel):
 
 class CartItemResponse(BaseModel):
     """Schema for cart item response."""
-    id: str
-    meal_id: str
+    id: UUID
+    meal_id: UUID
     quantity: int
     meal: MealResponse
-    
+
     class Config:
         from_attributes = True
 
 
 class CartResponse(BaseModel):
     """Schema for cart response."""
-    id: str
-    user_id: str
+    id: UUID
+    user_id: UUID
     items: List[CartItemResponse]
     subtotal: Decimal
     tax: Decimal

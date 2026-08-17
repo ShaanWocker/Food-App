@@ -2,6 +2,7 @@
 Menu screen for browsing available meals.
 """
 from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList, ThreeLineListItem
@@ -230,9 +231,10 @@ class MenuScreen(Screen):
         """Filter meals by category."""
         self._active_category = category if category != "All" else None
         # Highlight active button
+        theme_cls = MDApp.get_running_app().theme_cls
         for cat, btn in self._cat_buttons.items():
             btn.md_bg_color = (
-                self.theme_cls.primary_color
+                theme_cls.primary_color
                 if cat == category
                 else (0, 0, 0, 0)
             )
